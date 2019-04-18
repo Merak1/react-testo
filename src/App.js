@@ -7,68 +7,31 @@ const axios = require('axios');
 
 class App extends Component {
   state = {
-    gatitos: []
-    ,
-    // cat: []
-    // ,
-    // imagen: "https://bulma.io/images/placeholders/128x128.png"
-    imagen: " "
-
+    gatitos: [],
+    imagen: "test"
   }
 
-  // call() {
-  //   const estado = this.state.imagen;
-  //   console.log("estado", estado);
-  //   return estado
-  // }
+  componentDidMount() {
+    this.setState({ gatitos: [...Array(2)] });
+    console.log(this.state.gatitos);
 
+    for (let i = 0; 1 < this.state.gatitos.length; i++) {
+
+      console.log("for ");
+
+    }
+  }
   call = async () => {
     // const catfoto = ''
     let res = await axios.get('http://aws.random.cat/meow');
     let data = await res.data;
     console.log("data", data.file);
-    // data = data.file
-    this.setState({ imagen: data.file });
-    let estado = this.state.imagen;
+    data = data.file
+    // this.setState({ imagen: data.file });
+    let estado = data;
     console.log("estado", estado);
     return estado
-
-    // return data
-
-
   }
-  // call() {
-  //   let cat = ""
-  //   axios.get('http://aws.random.cat/meow')
-  //     .then(response => {
-  //       console.log('response.data', response.data);
-  //       // catfoto = response.data;
-  //       // console.log('catfoto', catfoto);
-  //       cat = '"' + response.data.file + '"'
-  //       // 
-  //       console.log("cat", cat);
-  //       this.setState({ imagen: cat })
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     })
-  //   // console.log("cat", cat);
-  //   // return cat
-  // }
-
-
-  componentDidMount() {
-    this.setState({ gatitos: [...Array(5)] })
-
-  }
-  // estado() {
-  //   // console.log(this.call())
-  //   // let estado = (this.call()).file
-
-  //   estado = this.state.imagen;
-  //   console.log("estado", estado);
-  //   return estado
-  // }
   render() {
     //funcion para visualizar, llama a el componente
     return (
@@ -80,16 +43,14 @@ class App extends Component {
       </div>
     );
   }
-
   printCat = () => {
-    // this.call()
+    this.call()
+    console.log("estado final", this.state)
     return (
-      <GetImagen cat={this.call()} />
-      // <GetImagen cat="benis" />
+      // <GetImagen cat={this.componentDidMount()} />
+      <GetImagen cat={this.state.imagen} />
 
     )
   }
-
 }
-
 export default App;
